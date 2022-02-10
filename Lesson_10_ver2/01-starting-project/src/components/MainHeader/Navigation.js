@@ -1,18 +1,15 @@
 import React, { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 
 import classes from './Navigation.module.css';
 
-import AuthContext from '../../Store/auth-context';
-
-const Navigation = () =>
+const Navigation = ( props ) =>
 {
-  // 使用 useContext 接收从 App.js 传来的数据
-  const ctx = useContext( AuthContext );
+  const ctx = useContext(AuthContext);
 
   return (
     <nav className={ classes.nav }>
       <ul>
-        {/* 登陆状态时，显示 a 标签 */ }
         { ctx.isLoggedIn && (
           <li>
             <a href="/">Users</a>
@@ -30,7 +27,6 @@ const Navigation = () =>
         ) }
       </ul>
     </nav>
-
   );
 };
 

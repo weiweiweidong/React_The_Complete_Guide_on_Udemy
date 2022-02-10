@@ -1,26 +1,23 @@
-import React, { useRef, useImperativeHandle } from 'react';
+import React, { useRef, useEffect, useImperativeHandle } from 'react';
 
 import classes from './Input.module.css';
 
-const Input = React.forwardRef(( props, ref ) =>
+const Input = React.forwardRef( ( props, ref ) =>
 {
     const inputRef = useRef();
+
+    // 焦点集中在当前输入框（激活当前输入框的输入状态）
     const activate = () =>
     {
         inputRef.current.focus();
-    };
+    }
 
-    useImperativeHandle(ref, () =>
+    useImperativeHandle( ref, () =>
     {
         return {
-            focus: activate,
+            focus: () => { inputRef.current.focus(); }
         };
     } );
-
-    // useEffect( () =>
-    // {
-    //     inputRef.current.focus();
-    // }, [] );
 
     return (
         <div
@@ -34,11 +31,10 @@ const Input = React.forwardRef(( props, ref ) =>
                 id={ props.id }
                 value={ props.value }
                 onChange={ props.onChange }
-                // 用户离开 input 输入框的时候触发的函数
                 onBlur={ props.onBlur }
             />
         </div>
     );
-});
+} )
 
 export default Input;
